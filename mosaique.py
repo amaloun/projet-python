@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-<<<<<<< HEAD
 import sys
 from random import randint
 from math import pi
-from svg import *
-from operations import *
+from svg import start, line, rect, close
+from operations import symetrie_point, symetrie, rotation
 nom = "etape1.svg"
+
+
 def etape1(height, width):
     """
         création des segements aléatoire
@@ -22,6 +23,7 @@ def etape1(height, width):
     # close(nom)
     return segements
 
+
 def etape2(segements, axe_vertical):
     """
         la deuxième étape de la symétrie
@@ -35,6 +37,7 @@ def etape2(segements, axe_vertical):
         line(point1[0], point1[1], point2[0], point2[1], nom)
     return segments_symetrique
 
+
 def etape3(seg, centre):
     """
         etape3 : on tourne 8 fois
@@ -46,6 +49,8 @@ def etape3(seg, centre):
             absc1, ord1 = segement1[0]
             absc2, ord2 = segement1[1]
             line(absc1, ord1, absc2, ord2, nom)
+
+
 def etape4(largeur_rect, width, height, point1, point2, point4):
     """
         etape 4 : on clippe dans le carré
@@ -66,6 +71,12 @@ def etape4(largeur_rect, width, height, point1, point2, point4):
     rect(point4[0], point4[1], largeur_rect, height4, nom)
 
 
+def etape5():
+    """
+        l'étape de 8 duplication
+    """
+    nom = "etape4.svg"
+
 def main():
     """
         le programme principal
@@ -78,30 +89,11 @@ def main():
     seg = segments + segments_symetrique
     centre = [width / 2, height / 2]
     etape3(seg, centre)
-    largeur_rect = width // 2
+    largeur_rect = width // 3
     point1 = [centre[0] - largeur_rect/2, centre[1] - largeur_rect / 2]
     point2 = [centre[0] + largeur_rect/2, centre[1] - largeur_rect / 2]
     point4 = [centre[0] - largeur_rect/2, centre[1] + largeur_rect / 2]
     etape4(largeur_rect, width, height, point1, point2, point4)
     close(nom)
-=======
-from svg import *
-from random import randint
-import sys
-def main():
-    """
-        le programme principal
-    """
-    width, height = int(sys.argv[1]), int(sys.argv[2])
-    start(height, width)
-    # première étape : traçage des segements aléatoires
-    nombre_de_segments = randint(15,25)
-    segements = []
-    for _ in range(nombre_de_segments):
-        point1 = [randint(0, width), randint(0, height)]
-        point2 = [randint(0, width), randint(0, height)]
-        segements += [[point1, point2]]
-        line(point1[0], point1[1], point2[0], point2[1])
-    close()
->>>>>>> 509d4ed6b4c5fe789d8baf783cc8c778cedd5fca
+
 main()
